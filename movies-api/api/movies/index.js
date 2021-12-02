@@ -21,6 +21,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
     }
 }));
 
+
+
 // Get movie reviews
 router.get('/:id/reviews', (req, res) => {
     const id = parseInt(req.params.id);
