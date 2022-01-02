@@ -9,6 +9,7 @@ import React from "react";
   import SignUpPage from "./signUpPage";
   import MovieProvider from "./moviesContext";
 
+
   const App = () => {
     return (
       <BrowserRouter>
@@ -30,10 +31,10 @@ import React from "react";
           </ul>
           <MovieProvider>
           <Switch>
+          <Route path="/signup" component={SignUpPage} />
             <Route path="/public" component={PublicPage} />
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
-            <Route path="/signup" component={SignUpPage} />
             <PrivateRoute path="/movies" component={Movies} />
             <PrivateRoute path="/profile" component={Profile} />
             <Redirect from="*" to="/" />

@@ -1,13 +1,13 @@
 import express from 'express';
-import uniqid from 'uniqid';
 import { movies, movieReviews, movieDetails } from './moviesData';
-import movieModel from './movieModel';
-import asyncHandler from 'express-async-handler';
-import {
-    getUpcomingMovies
-  } from '../tmdb-api';
+import uniqid from 'uniqid';
+ import movieModel from './movieModel';
+  import asyncHandler from 'express-async-handler';
+  import {getUpcomingMovies} from '../tmdb-api';
 
 const router = express.Router(); 
+
+
 router.get('/', asyncHandler(async (req, res) => {
     let { page = 1, limit = 10 } = req.query; // destructure page and limit and set default values
     [page, limit] = [+page, +limit]; //trick to convert to numeric (req.query will contain string values)
@@ -35,8 +35,6 @@ router.get('/:id', asyncHandler(async (req, res) => {
 }));
 
 
-
-// Get movie reviews
 router.get('/:id/reviews', (req, res) => {
     const id = parseInt(req.params.id);
     // find reviews in list
@@ -52,7 +50,6 @@ router.get('/:id/reviews', (req, res) => {
 
 
 
-//Post a movie review
 router.post('/:id/reviews', (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -70,9 +67,10 @@ router.post('/:id/reviews', (req, res) => {
     }
 });
 
+//upcoming
 router.get('/tmdb/upcoming', asyncHandler( async(req, res) => {
     const upcomingMovies = await getUpcomingMovies();
     res.status(200).json(upcomingMovies);
   }));
-
+  
 export default router;

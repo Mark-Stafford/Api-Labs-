@@ -11,7 +11,8 @@ router.get('/', async (req, res) => {
     const users = await User.find();
     res.status(200).json(users);
 });
- // Register OR authenticate a user
+
+// Register OR authenticate a user
 router.post('/',asyncHandler( async (req, res, next) => {
     if (!req.body.username || !req.body.password) {
       res.status(401).json({success: false, msg: 'Please pass username and password.'});
@@ -36,8 +37,8 @@ router.post('/',asyncHandler( async (req, res, next) => {
       }
   }));
 
- // Update a user
- router.put('/:id', async (req, res) => {
+  // Update a user
+  router.put('/:id', async (req, res) => {
     if (req.body._id) delete req.body._id;
     const result = await User.updateOne({
         _id: req.params.id,
@@ -65,9 +66,5 @@ router.post('/:userName/favourites', asyncHandler(async (req, res) => {
     const user = await User.findByUserName(userName).populate('favourites');
     res.status(200).json(user.favourites);
   }));
-
-
-
-
 
 export default router;
